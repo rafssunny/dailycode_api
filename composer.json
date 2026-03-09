@@ -1,0 +1,15 @@
+{
+    "name": "rafa/dailycode_api",
+    "autoload": {
+        "psr-4": {
+            "Rafa\\DailycodeApi\\": "api/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rafael Olegário",
+            "email": "rafaelolegario2008@gmail.com"
+        }
+    ],
+    "require": {}
+}
