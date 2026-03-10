@@ -19,7 +19,7 @@ class Router
     public function dispatch(): void
     {
         $request_method = $_SERVER['REQUEST_METHOD'];
-        $request_uri = $_SERVER['REQUEST_URI'];
+        $request_uri = '/' . $_GET['path'];
 
         foreach ($this->routes as $route) {
             // that part is for the {id}, {language}, {date}. after that, the values ​​within the {} become identifiable.
@@ -31,10 +31,14 @@ class Router
                 array_shift($matches);
 
                 $handler = $route['handler'];
-            } else {
-                http_response_code(404);
-                echo json_encode(['error' => 'Route not found']);
+
+                $controller = new $handler[0];
+                $method = $handler[1];
+                call_user_func([$controller, $method], $matches);
+                return;
             }
         }
+        http_response_code(404);
+        echo json_encode(['error' => 'Route not found']);
     }
 }
