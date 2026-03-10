@@ -2,16 +2,23 @@
 
 namespace Rafa\DailycodeApi\src\controllers;
 
-use PDO;
-use Rafa\DailycodeApi\db\DB;
+use Rafa\DailycodeApi\src\models\Code;
 
-class CodeController{
-    private PDO $pdo = DB::connection();
-    public function index() {
-        //
+class CodeController
+{
+    private Code $code;
+    public function __construct()
+    {
+        $this->code = new Code();
+    }
+    public function index(): void
+    {
+        http_response_code(200);
+        echo json_encode($this->code->getAll());
     }
 
-    public function show($id) {
-       //
+    public function show($id)
+    {
+        //
     }
 }
