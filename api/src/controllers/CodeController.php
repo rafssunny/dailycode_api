@@ -17,8 +17,9 @@ class CodeController
         echo json_encode($this->code->getAll());
     }
 
-    public function show($id)
+    public function show($param): void
     {
-        //
+        http_response_code(200);
+        echo json_encode($this->code->getById($param[0]));
     }
 }

@@ -18,4 +18,12 @@ class Code
         $data = $this->pdo->query('SELECT * FROM codes;');
         return $data->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getById($id): mixed
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM codes WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
 }
