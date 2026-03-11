@@ -16,6 +16,9 @@ class ApiKey
     {
         $headers = getallheaders();
         $api_key = $headers['API-KEY'] ?? null;
+        $stmt = $this->pdo->query('SELECT last_reset FROM api');
+        $last_reset = $stmt->fetch()['last_reset'];
+        $limit = 120;  //2 minutes
 
         if (!$api_key) {
             http_response_code(401);
@@ -23,10 +26,20 @@ class ApiKey
             exit;
         }
 
+        if ((time() - $last_reset) > $limit) {
+            $stmt = $this->pdo->prepare('UPDATE api SET last_reset = :last_reset, tokens = :tokens WHERE api_key = :api_key;');
+            $stmt->execute([
+                ':api_key' => $api_key,
+                ':last_reset' => time(),
+                ':tokens' => 20
+            ]);
+        }
+
         $stmt = $this->pdo->prepare('SELECT * FROM api WHERE api_key = :api_key');
         $stmt->execute([':api_key' => $api_key]);
-        
-        if (!$stmt->fetchObject()->tokens) {
+        $api = $stmt->fetchObject();
+
+        if (!$api->tokens) {
             http_response_code(403);
             echo json_encode(['error' => 'Invalid API key']);
             exit;
