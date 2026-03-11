@@ -5,6 +5,7 @@ namespace Rafa\DailycodeApi;
 class Router
 {
     private array $routes = [];
+    private array $middlewares = [];
 
     public function add($method, $path, $handler): void
     {
@@ -16,10 +17,19 @@ class Router
             ];
     }
 
+    public function middleware($middleware): void
+    {
+        $this->middlewares[] = $middleware;
+    }
+
     public function dispatch(): void
     {
         $request_method = $_SERVER['REQUEST_METHOD'];
-        $request_uri = '/' . $_GET['path'];
+        $request_uri = '/' . ($_GET['path'] ?? '');
+
+        foreach ($this->middlewares as $middleware) {
+            $middleware->handle();
+        }
 
         foreach ($this->routes as $route) {
             // that part is for the {id}, {language}, {date}. after that, the values ​​within the {} become identifiable.
