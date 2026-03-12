@@ -1,6 +1,6 @@
 # DailyCode API
 
-The **DailyCode API** provides access to programming codes used in the **DailyCode** project.
+The **DailyCode API** provides access to programming codes used in the [DailyCode](dailycode.page.gd/) project.
 
 DailyCode is a simple project designed to encourage developers to practice **daily code reading**.
 
