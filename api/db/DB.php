@@ -6,15 +6,15 @@ use PDO;
 use PDOException;
 class DB
 {
-    private const string HOST = '';
-    private const string DBNAME = '';
-    private const string USER = '';
-    private const string PASSWORD = '';
+    private const HOST = '';
+    private const DBNAME = '';
+    private const USER = '';
+    private const PASSWORD = '';
     public static function connection(
     ): PDO {
         try {
             $pdo = new PDO(
-                "mysql:host=" . self::HOST . ";dbname=" . self::DBNAME,
+                "mysql:host=" . self::HOST . ";dbname=" . self::DBNAME . ";charset=utf8mb4",
                 self::USER,
                 self::PASSWORD
             );
