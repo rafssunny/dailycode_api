@@ -33,7 +33,7 @@ API-KEY: a6d3b618daab8c71
 
 Limits for the public key:
 
-* **20 requests**
+* **50 requests**
 * Every **2 minutes**
 
 If you need a **personal API key**, you can request one by contacting me.

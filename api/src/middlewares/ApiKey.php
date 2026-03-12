@@ -31,7 +31,7 @@ class ApiKey
             $stmt->execute([
                 ':api_key' => $api_key,
                 ':last_reset' => time(),
-                ':tokens' => 20
+                ':tokens' => 50
             ]);
         }
 
