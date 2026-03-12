@@ -28,7 +28,7 @@ class Code
 
     public function getByLanguage(mixed $language): mixed
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM codes WHERE language = :language');
+        $stmt = $this->pdo->prepare('SELECT * FROM codes WHERE slug = :language');
         $stmt->execute([':language' => $language]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

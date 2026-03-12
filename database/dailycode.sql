@@ -134,3 +134,14 @@ ALTER TABLE `api`
 ALTER TABLE `codes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 COMMIT;
+
+ALTER TABLE codes ADD COLUMN slug VARCHAR(20);
+
+UPDATE codes SET slug = 'javascript' WHERE language = 'JavaScript';
+UPDATE codes SET slug = 'python' WHERE language = 'Python';
+UPDATE codes SET slug = 'ruby' WHERE language = 'Ruby';
+UPDATE codes SET slug = 'cpp' WHERE language = 'C++';
+UPDATE codes SET slug = 'php' WHERE language = 'Php';
+UPDATE codes SET slug = 'java' WHERE language = 'Java';
+UPDATE codes SET slug = 'csharp' WHERE language = 'C#';
+UPDATE codes SET slug = 'go' WHERE language = 'Go';
